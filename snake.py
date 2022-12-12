@@ -42,6 +42,14 @@ class Snake:
             self.segments[seg_num].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
 
+    def reset_snake(self):
+        for segment in self.segments:
+            segment.goto(1000, 1000)
+        self.segments.clear()
+        self.start_pos = 0
+        self.new_snake()
+        self.head = self.segments[0]
+
     def up(self):
         """ Method that defines what happens when the 'up' button is pressed """
         if self.head.heading() != DOWN:

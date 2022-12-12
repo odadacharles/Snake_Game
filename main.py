@@ -34,18 +34,20 @@ while game_is_on:
     # Detect collision with food
     if tim.head.distance(food) < 15:
         board.update_score()
+        board.write_score()
         tim.add_segment()
         food.move()
 
     # Detect collision with wall
     if tim.head.xcor() > 280 or tim.head.xcor() < -290 or tim.head.ycor() > 290 or tim.head.ycor() < -290:
-        board.game_over()
-        game_is_on = False
+        board.update_high_score()
+        tim.reset_snake()
 
     # Detect collision with tail
     for segment in tim.segments[1:]:
         if tim.head.distance(segment) < 15:
-            board.game_over()
-            game_is_on = False
+            board.update_high_score()
+            tim.reset_snake()
+
 
 screen.exitonclick()
